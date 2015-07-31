@@ -1,0 +1,10 @@
+.pagination {
+    font-size: 0px; /* in order to eliminate a space by LF between LIs */
+    white-space: nowrap; /* prevent new line on the way */
+}
+.pagination > * {
+    font-size: 14px; /* restore font size */
+}
+.pagination > li > a, .pagination > li > span {
+    float: none; /* prevent new line on the way */
+}

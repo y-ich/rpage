@@ -1,21 +1,21 @@
-rpage 
+rpage
 =====
 
-Highly responsive pagination for Bootstrap (http://auxiliary.github.io/rpage/)
+Highly responsive pagination for Bootstrap
 
-### [Demo](http://auxiliary.github.io/rpage/demo.html)
+The original rpage is http://auxiliary.github.io/rpage/ and this is re-written in CoffeeScript and is refactored.
 
 Usage
 =====
 
-Just include `responsive-pagination.js` and call the `rPage` function on the pagination element like this:
+Just include `responsive-pagination.css` and `responsive-pagination.js` and call the `rPage` function on the pagination element like this:
 
 ```javascript
 $(document).ready(function () {
     $(".pagination").rPage();
 });
 ```
-    
+
 Previous and Next Links
 =======================
 
@@ -29,3 +29,13 @@ your links, add classes to your list items like this:
   <li class="pagination-next"><a href="#">Next</a></li>
 </ul>
 ```
+
+Assumption
+==========
+
+All siblings of .pagination are inline and rPage make those elements one line responsively.
+
+Behavior
+========
+
+If you have .pagination-lg, rPage first remove this class when pagination is overflow.

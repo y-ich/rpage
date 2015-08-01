@@ -47,8 +47,7 @@
     rPage.prototype.isTooLong = function() {
       var MARGIN;
       MARGIN = 10;
-      console.log(this.$container.position().left);
-      return this.$container.position().left + this.$container.outerWidth(true) > this.$container.parent().innerWidth() - MARGIN;
+      return this.calculateWidth() > this.$container.parent().innerWidth() - MARGIN;
     };
 
     rPage.prototype.makeResponsive = function() {
@@ -129,6 +128,17 @@
       }
       this.els.css('display', '');
       this.$container.find('li').filter('.removable').remove();
+    };
+
+    rPage.prototype.calculateWidth = function() {
+      var e, j, len, ref, width;
+      width = 0;
+      ref = this.$container.parent().children();
+      for (j = 0, len = ref.length; j < len; j++) {
+        e = ref[j];
+        width += $(e).outerWidth(true);
+      }
+      return width;
     };
 
     return rPage;

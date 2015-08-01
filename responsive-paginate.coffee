@@ -66,8 +66,7 @@ class rPage
         prev = active_index - 1
 
         for i in [farthest_index - 1...0]
-            candidates = @els.filter(".page-away-#{i}").filter ->
-                @style['display'] isnt 'none' # You can not use :visible since li in pagination of Bootstrap is not visible (width = height = 0)
+            candidates = @els.filter ".page-away-#{i}:visible"
             for candidate in candidates
                 candid_candidate = $(candidate)
                 if @isRemovable candid_candidate

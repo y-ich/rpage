@@ -81,9 +81,7 @@
       next = active_index + 1;
       prev = active_index - 1;
       for (i = j = ref = farthest_index - 1; ref <= 0 ? j < 0 : j > 0; i = ref <= 0 ? ++j : --j) {
-        candidates = this.els.filter(".page-away-" + i).filter(function() {
-          return this.style['display'] !== 'none';
-        });
+        candidates = this.els.filter(".page-away-" + i + ":visible");
         for (k = 0, len = candidates.length; k < len; k++) {
           candidate = candidates[k];
           candid_candidate = $(candidate);

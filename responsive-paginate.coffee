@@ -26,12 +26,12 @@ class rPage
             , 100
 
     label: ->
-        active_index = @els.filter('.active').index()
+        activeIndex = @els.filter('.active').index()
         for el in @els
             $el = $(el)
             $el.addClass if not isNextOrPrevLink $el
-                "page-away-#{Math.abs active_index - $el.index()}"
-            else if $el.index() > active_index
+                "page-away-#{Math.abs activeIndex - $el.index()}"
+            else if $el.index() > activeIndex
                 'right-etc'
             else
                 'left-etc'
@@ -60,31 +60,31 @@ class rPage
         element.text().trim() isnt '...'
 
     removeOne: ->
-        active_index = @els.filter('.active').index()
-        farthest_index = @$container.find('li').length - 1
-        next = active_index + 1
-        prev = active_index - 1
+        activeIndex = @els.filter('.active').index()
+        farthestIndex = @$container.find('li').length - 1
+        next = activeIndex + 1
+        prev = activeIndex - 1
 
-        for i in [farthest_index - 1...0]
+        for i in [farthestIndex - 1...0]
             candidates = @els.filter ".page-away-#{i}:visible"
             for candidate in candidates
-                candid_candidate = $(candidate)
-                if @isRemovable candid_candidate
-                    candid_candidate.css 'display', 'none'
-                    if @needsEtcSign active_index, farthest_index - 1
-                        @els.eq(farthest_index - 2).before '<li class="disabled removable"><span>...</span></li>'
-                    if @needsEtcSign 1, active_index
+                $candidate = $(candidate)
+                if @isRemovable $candidate
+                    $candidate.css 'display', 'none'
+                    if @needsEtcSign activeIndex, farthestIndex - 1
+                        @els.eq(farthestIndex - 2).before '<li class="disabled removable"><span>...</span></li>'
+                    if @needsEtcSign 1, activeIndex
                         @els.eq(1).after '<li class="disabled removable"><span>...</span></li>'
                     return true
         false
 
-    needsEtcSign: (el1_index, el2_index) ->
-        if el2_index - el1_index <= 1
+    needsEtcSign: (el1Index, el2Index) ->
+        if el2Index - el1Index <= 1
             return false
         hasEtcSign = false
         hasHiddenElement = false
         $li = @$container.find 'li'
-        for i in [el1_index + 1...el2_index]
+        for i in [el1Index + 1...el2Index]
             el = $li.eq(i)
             if el.css('display') is 'none'
                 hasHiddenElement = true

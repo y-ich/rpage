@@ -34,13 +34,13 @@
     }
 
     rPage.prototype.label = function() {
-      var $el, active_index, el, j, len, ref;
-      active_index = this.els.filter('.active').index();
+      var $el, activeIndex, el, j, len, ref;
+      activeIndex = this.els.filter('.active').index();
       ref = this.els;
       for (j = 0, len = ref.length; j < len; j++) {
         el = ref[j];
         $el = $(el);
-        $el.addClass(!isNextOrPrevLink($el) ? "page-away-" + (Math.abs(active_index - $el.index())) : $el.index() > active_index ? 'right-etc' : 'left-etc');
+        $el.addClass(!isNextOrPrevLink($el) ? "page-away-" + (Math.abs(activeIndex - $el.index())) : $el.index() > activeIndex ? 'right-etc' : 'left-etc');
       }
     };
 
@@ -75,22 +75,22 @@
     };
 
     rPage.prototype.removeOne = function() {
-      var active_index, candid_candidate, candidate, candidates, farthest_index, i, j, k, len, next, prev, ref;
-      active_index = this.els.filter('.active').index();
-      farthest_index = this.$container.find('li').length - 1;
-      next = active_index + 1;
-      prev = active_index - 1;
-      for (i = j = ref = farthest_index - 1; ref <= 0 ? j < 0 : j > 0; i = ref <= 0 ? ++j : --j) {
+      var $candidate, activeIndex, candidate, candidates, farthestIndex, i, j, k, len, next, prev, ref;
+      activeIndex = this.els.filter('.active').index();
+      farthestIndex = this.$container.find('li').length - 1;
+      next = activeIndex + 1;
+      prev = activeIndex - 1;
+      for (i = j = ref = farthestIndex - 1; ref <= 0 ? j < 0 : j > 0; i = ref <= 0 ? ++j : --j) {
         candidates = this.els.filter(".page-away-" + i + ":visible");
         for (k = 0, len = candidates.length; k < len; k++) {
           candidate = candidates[k];
-          candid_candidate = $(candidate);
-          if (this.isRemovable(candid_candidate)) {
-            candid_candidate.css('display', 'none');
-            if (this.needsEtcSign(active_index, farthest_index - 1)) {
-              this.els.eq(farthest_index - 2).before('<li class="disabled removable"><span>...</span></li>');
+          $candidate = $(candidate);
+          if (this.isRemovable($candidate)) {
+            $candidate.css('display', 'none');
+            if (this.needsEtcSign(activeIndex, farthestIndex - 1)) {
+              this.els.eq(farthestIndex - 2).before('<li class="disabled removable"><span>...</span></li>');
             }
-            if (this.needsEtcSign(1, active_index)) {
+            if (this.needsEtcSign(1, activeIndex)) {
               this.els.eq(1).after('<li class="disabled removable"><span>...</span></li>');
             }
             return true;
@@ -100,15 +100,15 @@
       return false;
     };
 
-    rPage.prototype.needsEtcSign = function(el1_index, el2_index) {
+    rPage.prototype.needsEtcSign = function(el1Index, el2Index) {
       var $li, el, hasEtcSign, hasHiddenElement, i, j, ref, ref1;
-      if (el2_index - el1_index <= 1) {
+      if (el2Index - el1Index <= 1) {
         return false;
       }
       hasEtcSign = false;
       hasHiddenElement = false;
       $li = this.$container.find('li');
-      for (i = j = ref = el1_index + 1, ref1 = el2_index; ref <= ref1 ? j < ref1 : j > ref1; i = ref <= ref1 ? ++j : --j) {
+      for (i = j = ref = el1Index + 1, ref1 = el2Index; ref <= ref1 ? j < ref1 : j > ref1; i = ref <= ref1 ? ++j : --j) {
         el = $li.eq(i);
         if (el.css('display') === 'none') {
           hasHiddenElement = true;

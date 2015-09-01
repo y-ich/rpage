@@ -40,8 +40,7 @@
     	    {
     	    	this.reset();
     	    	var width = this.calculateWidth();
-
-    	    	while (width > this.els.parent().parent().outerWidth() - 10)
+    	    	while (width > this.els.parent().parent().innerWidth() - 10)
     	    	{
     	    		var did_remove = this.removeOne();
     	    		if (did_remove == false)
@@ -54,11 +53,10 @@
 
         	this.isNextOrPrevLink = function(element)
         	{
+                var text = element.text().trim();
                 return (
                     element.hasClass('pagination-prev')
                     || element.hasClass('pagination-next')
-                    || element.text() == "»"
-                    || element.text() == "«"
                 );
         	}
 
@@ -158,13 +156,7 @@
 
     	    this.calculateWidth = function()
     	    {
-    	    	var width = 0;
-    	    	for (var i = 0; i < $container.find("li").length; i++)
-    	    	{
-    	    		width += $container.find("li").eq(i).children("a").eq(0).outerWidth();
-    	    		width += $container.find("li").eq(i).children("span").eq(0).outerWidth();
-    	    	}
-    	    	return width;
+                return $container.outerWidth(true);
     	    }
 
     	    this.els = $container.find("li");
